@@ -3,6 +3,7 @@
 process highMemoryTask {
     tag "High memory task"
     memory '4 GB'
+    container 'ubuntu:20.04'
 
     output:
     file 'high_mem.txt' 
@@ -16,7 +17,8 @@ process highMemoryTask {
 process lowMemoryTask {
     tag "Low memory task"
     memory '512 MB'
-
+    container 'ubuntu:20.04'
+    
     output:
     file 'low_mem.txt'
 
