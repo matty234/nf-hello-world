@@ -5,7 +5,7 @@ process highMemoryTask {
     memory '4 GB'
 
     output:
-    file 'high_mem.txt' into highMemChannel
+    file 'high_mem.txt' 
 
     script:
     """
@@ -18,7 +18,7 @@ process lowMemoryTask {
     memory '512 MB'
 
     output:
-    file 'low_mem.txt' into lowMemChannel
+    file 'low_mem.txt'
 
     script:
     """
