@@ -2,7 +2,6 @@
 
 process highMemoryTask {
     tag "High memory task"
-    pod = []
     memory '4 GB'
 
     output:
@@ -16,7 +15,6 @@ process highMemoryTask {
 
 process lowMemoryTask {
     tag "Low memory task"
-    pod = []
     memory '512 MB'
 
     output:
@@ -30,10 +28,13 @@ process lowMemoryTask {
 
 
 workflow {
-    highMemoryTask().subscribe {
-        println "High memory task completed: $it"
-    }
-    lowMemoryTask().subscribe {
-        println "Low memory task completed: $it"
-    }
+    // perform both tasks in parallel and print the results
+    highMemChannel = highMemoryTask()
+    lowMemChannel = lowMemoryTask()
+
+    highMemChannel.subscribe { println "High memory task result: $it" }
+    lowMemChannel.subscribe { println "Low memory task result: $it" }
+
+    // wait for both tasks to complete
+    highMemChannel.combine(lowMemChannel).subscribe { println "All tasks completed"
 } 
