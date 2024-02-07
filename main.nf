@@ -36,5 +36,5 @@ workflow {
     lowMemChannel.subscribe { println "Low memory task result: $it" }
 
     // wait for both tasks to complete
-    highMemChannel.combine(lowMemChannel).subscribe { println "All tasks completed"
+    highMemChannel.combine(lowMemChannel).subscribe { println "All tasks completed" }
 } 
