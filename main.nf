@@ -2,6 +2,7 @@
 
 process highMemoryTask {
     tag "High memory task"
+    pod = []
     memory '4 GB'
 
     output:
@@ -15,6 +16,7 @@ process highMemoryTask {
 
 process lowMemoryTask {
     tag "Low memory task"
+    pod = []
     memory '512 MB'
 
     output:
@@ -26,5 +28,12 @@ process lowMemoryTask {
     """
 }
 
-highMemChannel.subscribe { println "High Memory Task Output: ${it.text}" }
-lowMemChannel.subscribe { println "Low Memory Task Output: ${it.text}" }
+
+workflow {
+    highMemoryTask().subscribe {
+        println "High memory task completed: $it"
+    }
+    lowMemoryTask().subscribe {
+        println "Low memory task completed: $it"
+    }
+} 
